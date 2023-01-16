@@ -32,19 +32,14 @@ int	check_index_croatia2(char *str, int i)
 
 int	main()
 {
-	char	str[102];
+	char	str[104];
 	int	i = 0;
 	int	cnt = 0;
 
 	scanf("%s", str);
 	while (str[i])
 	{
-		if (str[i] != '-' && str[i] != '=')
-		{
-			cnt++;
-			i++;
-		}
-		else if (check_index_croatia(str, i) == 1)
+		if (check_index_croatia(str, i) == 1)
 		{
 			cnt++;
 			i += 2;
@@ -53,6 +48,11 @@ int	main()
 		{
 			cnt++;
 			i += 3;
+		}
+		else if (str[i] != '-' && str[i] != '=')
+		{
+			cnt++;
+			i++;
 		}
 		else
 			i++;
