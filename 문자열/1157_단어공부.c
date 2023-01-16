@@ -1,70 +1,48 @@
 #include <stdio.h>
 
-int	make_small_alpha(char c)
-{
-	if (c >= 'A' && c <= 'Z')
-		c -= 'a' - 'A';
-	return (c);
-}
-
-int	maximum_repeat(char *str)
+int	ft_strlen(char *str)
 {
 	int	i = 0;
-	int	max = 0;
 
 	while (str[i])
-	{
-		if (max < str[i])
-			max = str[i];
-	}
-	return (max);
+		i++;
+	return(i);
 }
 
 int	main()
 {
 	char	str[1000000];
+	int	alpha[26];
 	int	i = 0;
-	int	alphabet = 'a';
-	int	cnt;
-	char	alpha[26];
-	int	max_repeat;
+	int	len;
+	int	max = 0;
+	char	ans;
 
 	scanf("%s", str);
-	while (str[i])
+	len = ft_strlen(str);
+	while (i < len)
 	{
-		str[i] = make_small_alpha(str[i]);
+		if (str[i] >= 'a')
+			alpha[str[i] - 'a'] += 1;
+		else
+			alpha[str[i] - 'A'] += 1;
 		i++;
 	}
-	while (alphabet <= 'z')
+	i = 0;
+	while(i < 26)
 	{
-		i = 0;
-		cnt = 0;
-		while(str[i])
+		if (alpha[i] == max)
+			ans = '?';
+		else
 		{
-			if (str[i] == alphabet)
-				cnt++;
+			if (alpha[i] > max)
+			{
+				max = alpha[i];
+				ans = 'A' + i;
+			}
 		}
-		alpha[alphabet - 'a'] = cnt;
-		alphabet++;
-	}
-	i = 0;
-	cnt = 0;
-	max_repeat = maximum_repeat(alpha);
-	while (alpha[i])
-	{
-		if (alpha[i] == max_repeat)
-			cnt++;
 		i++;
 	}
-	if (cnt > 1)
-		printf("?");
-	i = 0;
-	while (alpha[i])
-	{
-		if (alpha[i] == max_repeat)
-			break ;
-		i++;
-	}
-	printf("%c\n", 'A' + i);
-	return (0);
+	printf("%c", ans);
+	return 0;
 }
