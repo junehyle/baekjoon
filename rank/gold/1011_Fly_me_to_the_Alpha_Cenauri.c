@@ -6,9 +6,7 @@ int	main()
 	int	start;
 	int	end;
 	int	gap;
-	int	res = 1;
-	long	i;
-	long	square;
+	int	i;
 	
 	scanf("%d", &cases);
 	while (cases > 0)
@@ -16,22 +14,15 @@ int	main()
 		scanf("%d %d", &start, &end);
 		gap = end - start;
 		i = 1;
-		square = i * i;
-		while (gap > square)
+		while (gap > 2 * i)
 		{
-			if (gap <= square + i)
-				res = 2 * i;
-			else
-			{
-				i++;
-				res = 2 * i - 1;
-				square = i * i;
-				continue ;
-			}
+			gap -= 2 * i;
 			i++;
-			square = i * i;
 		}
-		printf("%d\n", res);
+		if ((gap - 1) / i == 0)
+			printf("%d\n", 2 * i - 1);
+		else
+			printf("%d\n", 2 * i);
 		cases--;
 	}
 	return 0;
